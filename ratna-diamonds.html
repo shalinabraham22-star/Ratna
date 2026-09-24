@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RATNA — Fine Diamonds for Her</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#221D19; --bg:#FDFBF7; --panel:#F3E9DF; --line:#E4DACD;
+  --gold:#A8763E; --burgundy:#6B2634; --muted:#7A6F63;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+body{background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55;}
+a{color:inherit; text-decoration:none;}
+h1,h2,.logo,.founder-card h3{font-family:'Fraunces',serif;}
+.wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+header{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background:#fff; border-bottom:1px solid var(--line);}
+nav.wrap{display:flex; align-items:center; justify-content:space-between; height:70px;}
+.logo{display:flex; align-items:center; gap:9px; font-size:1.5rem; font-weight:600; letter-spacing:0.01em;}
+.logo svg{width:20px; height:20px;}
+.navlinks{display:flex; gap:30px; font-size:0.92rem;}
+.navlinks button{background:none;border:none;font:inherit;color:var(--ink);cursor:pointer;padding:6px 0;position:relative;}
+.navlinks button.active{color:var(--gold);}
+.navlinks button.active::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gold);}
+button:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+.nav-ig a{border:1px solid var(--ink); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center;}
+.menu-toggle{display:none; background:none; border:none; font-size:1.5rem; cursor:pointer;}
+@media(max-width:760px){
+  .navlinks{position:fixed; top:70px; left:0; right:0; background:#fff; flex-direction:column; gap:0; border-bottom:1px solid var(--line); transform:translateY(-130%); transition:transform .3s ease; padding:6px 28px 18px;}
+  .navlinks.open{transform:translateY(0);}
+  .navlinks button{padding:12px 0; border-bottom:1px solid var(--line); text-align:left;}
+  .menu-toggle{display:block;}
+}
+
+.page{display:none;}
+.page.active{display:block;}
+
+.hero{padding:60px 0 50px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+.hero .eyebrow{color:var(--gold); font-size:0.82rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:14px;}
+.hero h1{font-size:clamp(2.1rem,4.6vw,3.1rem); font-weight:500; line-height:1.14; margin-bottom:18px;}
+.hero p{color:var(--muted); max-width:48ch; margin-bottom:28px;}
+.hero-art{aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 38% 32%, #fff 0%, var(--panel) 55%, var(--bg) 100%); border-radius:6px;}
+.hero-art svg{width:58%;}
+@media(max-width:760px){.hero{grid-template-columns:1fr; padding-top:36px;} .hero-art{order:-1; max-width:260px; margin:0 auto;}}
+.cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+.btn{display:inline-block; padding:12px 24px; font-size:0.92rem; font-weight:600; cursor:pointer; border:1px solid var(--ink); border-radius:2px;}
+.btn-solid{background:var(--ink); color:#fff;}
+.btn-outline{background:transparent; color:var(--ink);}
+
+section{padding:52px 0;}
+.section-alt{background:var(--panel);}
+.section-head{max-width:56ch; margin-bottom:36px;}
+.section-head h2{font-size:clamp(1.5rem,2.8vw,2rem); font-weight:700;}
+.section-head p{color:var(--muted); margin-top:10px; font-size:0.96rem;}
+
+/* Diamond shapes gallery */
+.shape-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:18px;}
+@media(max-width:760px){.shape-grid{grid-template-columns:repeat(3,1fr);}}
+.shape-item{text-align:center;}
+.shape-item .box{border:1px solid var(--line); background:#fff; padding:18px 8px; margin-bottom:10px; border-radius:4px;}
+.shape-item svg{width:100%; max-width:64px; height:64px;}
+.shape-item .name{font-size:0.82rem; color:var(--muted);}
+
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+@media(max-width:760px){.grid3{grid-template-columns:1fr;}}
+.card{background:#fff; padding:28px 24px;}
+.card .mark{width:34px; height:34px; margin-bottom:14px;}
+.card h3{font-size:1.05rem; margin-bottom:8px; font-weight:600; font-family:'Fraunces',serif;}
+.card p{color:var(--muted); font-size:0.9rem;}
+
+.prod-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+@media(max-width:760px){.prod-grid{grid-template-columns:1fr;}}
+.prod{background:#fff; padding:26px 22px;}
+.prod .stone{width:100%; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; background:var(--panel); margin-bottom:16px;}
+.prod .stone svg{width:34%;}
+.prod h3{font-size:0.98rem; font-weight:600;}
+.prod .price{color:var(--gold); font-weight:600; margin:4px 0 6px; font-size:0.92rem;}
+.prod p{color:var(--muted); font-size:0.86rem;}
+
+.about-grid{display:grid; grid-template-columns:0.8fr 1.2fr; gap:44px; align-items:start;}
+@media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
+.founder-card{border:1px solid var(--line); padding:26px;}
+.founder-card .initials{width:56px;height:56px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px;}
+.founder-card h3{font-size:1.05rem; font-weight:700;}
+.founder-card .role{color:var(--muted); font-size:0.85rem; margin-bottom:14px;}
+.about-copy p{margin-bottom:16px; font-size:0.96rem;}
+.stat-row{display:flex; gap:36px; margin-top:30px; flex-wrap:wrap;}
+.stat .num{font-size:1.7rem; font-weight:700; color:var(--gold);}
+.stat .label{color:var(--muted); font-size:0.82rem;}
+
+.values{list-style:none; margin-top:28px; border-top:1px solid var(--line);}
+.values li{display:grid; grid-template-columns:120px 1fr; gap:20px; padding:16px 0; border-bottom:1px solid var(--line);}
+.values li .vname{font-weight:600;}
+.values li p{color:var(--muted); font-size:0.88rem;}
+@media(max-width:600px){.values li{grid-template-columns:1fr; gap:4px;}}
+
+.services{margin-top:44px;}
+.services h3{margin-bottom:16px; font-size:1.1rem; font-weight:700;}
+.svc-list{list-style:none;}
+.svc-list li{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--line); font-size:0.92rem;}
+.svc-list li span.d{color:var(--muted); font-size:0.84rem;}
+
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px;}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr;}}
+.field{margin-bottom:16px;}
+.field label{display:block; font-size:0.82rem; color:var(--muted); margin-bottom:6px;}
+.field input, .field textarea{width:100%; border:1px solid var(--line); background:#fff; padding:11px 13px; font:inherit; border-radius:2px;}
+.field textarea{min-height:100px; resize:vertical;}
+.info-block{margin-bottom:26px;}
+.info-block h3{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-bottom:6px; font-weight:600;}
+.info-block p{font-size:0.98rem;}
+.map-box{border:1px solid var(--line); aspect-ratio:16/9; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; text-align:center; padding:20px;}
+.map-box svg{width:32px;}
+.map-box a{border-bottom:1px solid var(--ink); font-size:0.88rem;}
+.social-row{display:flex; gap:12px; margin-top:6px;}
+.social-row a{border:1px solid var(--ink); border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center;}
+
+footer{border-top:1px solid var(--line); padding:30px 0; text-align:center; color:var(--muted); font-size:0.82rem;}
+footer .flogo{color:var(--ink); margin-bottom:6px; font-weight:700;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2 3 9l9 13 9-13-9-7Z" stroke="#6B2634" stroke-width="1.4" stroke-linejoin="round"/><path d="M3 9h18M8 9 12 2l4 7M8 9l4 13 4-13" stroke="#A8763E" stroke-width="1" stroke-linejoin="round"/></svg>RATNA</div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <button data-page="home" class="active">Home</button>
+      <button data-page="about">About</button>
+      <button data-page="products">Collections</button>
+      <button data-page="contact">Contact</button>
+    </div>
+    <div class="nav-ig">
+      <a href="https://instagram.com/ratnadiamonds" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="page active" id="home">
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Fine diamond jewellery, Kochi</div>
+        <h1>Diamonds chosen the way a woman chooses — with certainty.</h1>
+        <p>RATNA designs and sets certified diamonds for women who wear their jewellery every day, not just on occasions. Every piece is made to order, in our own workshop.</p>
+        <div class="cta-row">
+          <button class="btn btn-solid" data-page="products">View collections</button>
+          <button class="btn btn-outline" data-page="contact">Book a private viewing</button>
+        </div>
+      </div>
+      <div class="hero-art" id="heroArt"></div>
+    </div>
+  </section>
+
+  <section id="shapes-wrap" class="section-alt">
+    <div class="section-head">
+      <h2>Diamond shapes we cut</h2>
+      <p>Every stone at RATNA is cut in-house to one of these six forms, then matched to a setting.</p>
+    </div>
+    <div class="shape-grid" id="shapeGrid"></div>
+  </section>
+
+  <section id="featured-wrap">
+    <div class="section-head">
+      <h2>Why women choose RATNA</h2>
+    </div>
+    <div class="grid3" id="featureGrid"></div>
+  </section>
+
+  <section class="page" id="about">
+    <div class="section-head">
+      <h2>Started at a workbench in Kochi, in 2011</h2>
+    </div>
+    <div class="about-grid">
+      <div class="founder-card">
+        <div class="initials">SA</div>
+        <h3>Shalin Abraham</h3>
+        <div class="role">Founder &amp; Chief Designer</div>
+        <p style="color:var(--muted); font-size:0.9rem;">Trained as a gemologist before she trained as a jeweller, Shalin still hand-checks every stone that enters the workshop before it's set.</p>
+      </div>
+      <div class="about-copy">
+        <p>RATNA began as a single workbench and a promise: no piece leaves the workshop until Shalin has looked at the stone herself.</p>
+        <p>Fifteen years later, that promise hasn't changed. We still cut our own settings in-house, still grade every diamond against GIA and IGI certificates, and still design each piece around how a woman actually moves through her day — not how it photographs on a stand.</p>
+        <p>Every RATNA piece carries a certificate, a lifetime cleaning service, and Shalin's own sign-off.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="num">14</div><div class="label">years in business</div></div>
+          <div class="stat"><div class="num">100%</div><div class="label">certified stones</div></div>
+          <div class="stat"><div class="num">3,000+</div><div class="label">pieces handcrafted</div></div>
+        </div>
+      </div>
+    </div>
+    <ul class="values" id="valuesList"></ul>
+  </section>
+
+  <section class="page" id="products">
+    <div class="section-head">
+      <h2>Made to order, sized to you</h2>
+      <p>Every setting below is a starting point — stone shape, metal and band width are adjusted to you at no extra cost.</p>
+    </div>
+    <div class="prod-grid" id="prodGrid"></div>
+    <div class="services">
+      <h3>Services</h3>
+      <ul class="svc-list" id="svcList"></ul>
+    </div>
+  </section>
+
+  <section class="page" id="contact">
+    <div class="section-head">
+      <h2>Let's talk about your piece</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="info-block">
+          <h3>Showroom</h3>
+          <p>RATNA Diamonds, 2nd Floor, Marine Drive Chambers,<br>Kochi, Kerala 682031</p>
+        </div>
+        <div class="info-block">
+          <h3>Reach us</h3>
+          <p>+91 98470 XX210 · hello@ratnadiamonds.in</p>
+        </div>
+        <div class="info-block">
+          <h3>Hours</h3>
+          <p>Tue–Sun, 10:30am – 7:30pm · Closed Mondays</p>
+        </div>
+        <div class="info-block">
+          <h3>Follow along</h3>
+          <div class="social-row">
+            <a href="https://instagram.com/ratnadiamonds" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></a>
+            <a href="https://facebook.com/ratnadiamonds" target="_blank" rel="noopener" aria-label="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v7h4v-7h3l1-4h-4V9c0-.6.4-1 1-1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+        <div class="map-box">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.2 7-12.5C19 5.4 15.9 2 12 2S5 5.4 5 9.5C5 14.8 12 22 12 22Z" stroke="#1A1816" stroke-width="1.3"/><circle cx="12" cy="9.5" r="2.5" stroke="#1A1816" stroke-width="1.3"/></svg>
+          <div>Marine Drive Chambers, Kochi</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Marine+Drive+Kochi+Kerala" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+        </div>
+      </div>
+      <form onsubmit="event.preventDefault(); document.getElementById('formNote').style.display='block';">
+        <div class="field"><label for="fname">Name</label><input id="fname" type="text" required></div>
+        <div class="field"><label for="femail">Email</label><input id="femail" type="email" required></div>
+        <div class="field"><label for="fmsg">What are you looking for?</label><textarea id="fmsg" required></textarea></div>
+        <button class="btn btn-solid" type="submit">Send enquiry</button>
+        <p id="formNote" style="display:none; margin-top:12px; color:var(--muted); font-size:0.86rem;">Thank you — we'll reply within a day.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="flogo">RATNA</div>
+  <div>Fine diamonds for her · Kochi, Kerala · © 2026 RATNA Diamonds</div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="diaGrad" x1="15%" y1="10%" x2="90%" y2="95%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="45%" stop-color="#F3E9DF"/>
+      <stop offset="100%" stop-color="#D9C6AC"/>
+    </linearGradient>
+    <linearGradient id="diaGradDeep" x1="10%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDF9F3"/>
+      <stop offset="55%" stop-color="#E7D3B8"/>
+      <stop offset="100%" stop-color="#C7A876"/>
+    </linearGradient>
+  </defs>
+</svg>
+<script>
+const gold='#A8763E', ink='#221D19', burg='#6B2634';
+const shapes = {
+  round: `<circle cx="50" cy="50" r="38" fill="url(#diaGrad)" stroke="${ink}" stroke-width="1.6"/><circle cx="50" cy="50" r="20" fill="none" stroke="${burg}" stroke-width="1"/><path d="M50 12v76M12 50h76M20 20l60 60M80 20 20 80" stroke="${gold}" stroke-width="0.7"/>`,
+  princess: `<rect x="14" y="14" width="72" height="72" fill="url(#diaGrad)" stroke="${ink}" stroke-width="1.6"/><path d="M14 14 86 86M86 14 14 86M50 14v72M14 50h72" stroke="${gold}" stroke-width="0.7"/>`,
+  emerald: `<path d="M28 14h44l14 14v44l-14 14H28L14 72V28l14-14Z" fill="url(#diaGradDeep)" stroke="${ink}" stroke-width="1.6"/><rect x="30" y="30" width="40" height="40" fill="none" stroke="${burg}" stroke-width="0.9"/>`,
+  oval: `<ellipse cx="50" cy="50" rx="30" ry="40" fill="url(#diaGrad)" stroke="${ink}" stroke-width="1.6"/><ellipse cx="50" cy="50" rx="15" ry="24" fill="none" stroke="${burg}" stroke-width="0.9"/><path d="M50 10v80" stroke="${gold}" stroke-width="0.7"/>`,
+  pear: `<path d="M50 12C34 34 18 46 18 64a32 32 0 0 0 64 0c0-18-16-30-32-52Z" fill="url(#diaGradDeep)" stroke="${ink}" stroke-width="1.6"/><path d="M50 30v58M32 60h36" stroke="${gold}" stroke-width="0.8"/>`,
+  cushion: `<path d="M20 30q0-16 16-16h28q16 0 16 16v28q0 16-16 16H36q-16 0-16-16Z" fill="url(#diaGrad)" stroke="${ink}" stroke-width="1.6"/><path d="M20 20 80 80M80 20 20 80" stroke="${gold}" stroke-width="0.7"/>`
+};
+document.getElementById('heroArt').innerHTML = `<svg viewBox="0 0 100 100">${shapes.round}</svg>`;
+document.getElementById('shapeGrid').innerHTML = Object.entries(shapes).map(([name,svg])=>`
+  <div class="shape-item">
+    <div class="box"><svg viewBox="0 0 100 100">${svg}</svg></div>
+    <div class="name">${name[0].toUpperCase()+name.slice(1)}</div>
+  </div>`).join('');
+
+const features = [
+  {t:'Certified, always', d:'Every diamond ships with a GIA or IGI certificate matched to the stone in your hand, not a stock photo.'},
+  {t:'Made in our workshop', d:'Settings are cut, cast and polished in-house in Kochi — nothing is dropshipped or outsourced.'},
+  {t:'Sized around you', d:'Ring size, chain length and band width are fitted to you before a single stone is set.'}
+];
+document.getElementById('featureGrid').innerHTML = features.map(f=>`
+  <div class="card"><div class="mark"><svg viewBox="0 0 100 100">${shapes.round}</svg></div><h3>${f.t}</h3><p>${f.d}</p></div>`).join('');
+
+const values = [
+  {n:'Honesty', d:'Every certificate and every price is shown before you decide, not after.'},
+  {n:'Craft', d:'Settings are hand-finished by the same three artisans who trained under Shalin.'},
+  {n:'Care', d:'Free cleaning and re-polishing for the life of the piece, no matter when you bought it.'}
+];
+document.getElementById('valuesList').innerHTML = values.map(v=>`
+  <li><div class="vname">${v.n}</div><p>${v.d}</p></li>`).join('');
+
+const products = [
+  {n:'The Kavu Solitaire', p:'₹1,85,000 onward', d:'A single round-brilliant stone on a low, everyday-wearable band.', shape:'round'},
+  {n:'Nila Halo Ring', p:'₹2,40,000 onward', d:'A centre stone framed by a halo of smaller pavé diamonds.', shape:'cushion'},
+  {n:'Thanka Tennis Bracelet', p:'₹3,60,000 onward', d:'Matched round diamonds set in a continuous line, 18k gold.', shape:'round'},
+  {n:'Meen Drop Earrings', p:'₹95,000 onward', d:'Pear-cut drops designed to catch light without weight.', shape:'pear'},
+  {n:'Vayal Pendant', p:'₹1,10,000 onward', d:'A single emerald-cut pendant on an adjustable chain.', shape:'emerald'},
+  {n:'Bridal Set — Ilam', p:'On request', d:'Matched oval-cut ring, earring and pendant set, bespoke.', shape:'oval'}
+];
+document.getElementById('prodGrid').innerHTML = products.map(p=>`
+  <div class="prod">
+    <div class="stone"><svg viewBox="0 0 100 100">${shapes[p.shape]}</svg></div>
+    <h3>${p.n}</h3>
+    <div class="price">${p.p}</div>
+    <p>${p.d}</p>
+  </div>`).join('');
+
+const services = [
+  {n:'Custom design', d:'Bring a sketch or an idea — we design and quote within a week.'},
+  {n:'Independent certification', d:'GIA / IGI grading arranged for any stone, set or loose.'},
+  {n:'Resizing & repair', d:'Ring resizing, prong retipping and chain repair, lifetime.'},
+  {n:'Buy-back & upgrade', d:'Trade an existing RATNA piece toward a new one at fair value.'}
+];
+document.getElementById('svcList').innerHTML = services.map(s=>`
+  <li><span>${s.n}</span><span class="d">${s.d}</span></li>`).join('');
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active', p.id===id));
+  const showHome = id==='home';
+  document.getElementById('shapes-wrap').style.display = showHome ? '' : 'none';
+  document.getElementById('featured-wrap').style.display = showHome ? '' : 'none';
+  document.querySelectorAll('.navlinks button').forEach(b=>b.classList.toggle('active', b.dataset.page===id));
+  document.getElementById('navlinks').classList.remove('open');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+document.querySelectorAll('[data-page]').forEach(el=>{
+  el.addEventListener('click', ()=>showPage(el.dataset.page));
+});
+document.getElementById('menuToggle').addEventListener('click', ()=>{
+  document.getElementById('navlinks').classList.toggle('open');
+});
+</script>
+</body>
+</html>
